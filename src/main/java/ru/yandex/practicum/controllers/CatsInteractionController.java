@@ -1,29 +1,30 @@
 package ru.yandex.practicum.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
-public class CatsController {
-
+@RequestMapping("/cats")
+public class CatsInteractionController {
     private int happiness = 0;
 
-    @GetMapping("/cats/converse")
-    public Map<String, String> say() {
+    @GetMapping("/converse")
+    public Map<String, String> converse() {
         happiness++;
-        return Map.of("say", "Meow");
+        return Map.of("talk", "Мяу");
     }
 
-    @GetMapping("/cats/stroke")
-    public Map<String, String> stroke(@RequestParam(required = false) final Integer count) {
+    @GetMapping("/pet")
+    public Map<String, String> pet(@RequestParam(required = false) final Integer count) {
         happiness += count;
-        return Map.of("say", "Murr".repeat(count));
+        return Map.of("talk", "Муррр. ".repeat(count));
     }
 
-    @GetMapping("/cats/happiness")
+    @GetMapping("/happiness")
     public Map<String, Integer> happiness() {
         return Map.of("happiness", happiness);
     }
